@@ -1,6 +1,7 @@
 
 
 const postBlogValidate = (blog)=>{
+    console.log(blog.title)
     if (blog.title === undefined || typeof blog.title !== "string" || blog.title.length > 40){
         return {
             success: false,
@@ -19,7 +20,7 @@ const postBlogValidate = (blog)=>{
             message: "blog author is required, must be a string and must be less than 40 chars long"
         }
     }
-    if (blog.category === undefined || !Array.isArray(blog.category)){
+    if (blog.categories === undefined || !Array.isArray(blog.categories)){
         return {
             success: false,
             message: "blog category is required and must be an array"
@@ -30,28 +31,23 @@ const postBlogValidate = (blog)=>{
     }
 }
 
-const putBlogValidate = (blog, blogToUpdate)=>{
-    
-    if(blog.title !== undefined){
+const putBlogValidate = (blog)=>{
+    if("title" in blog){
+       console.log('here')
         if (typeof blog.title !== "string" || blog.title.length > 40){
             return {
                 success: false,
                 message: "blog title must be a string and must be less than 40 chars long"
             }
         }
-        else{
-            blogToUpdate.title = blog.title
-        }
     }
+    print('here')
     if(blog.text !== undefined){
         if (typeof blog.text !== "string"){
             return {
                 success: false,
                 message: "blog text must be a string"
             }
-        }
-        else{
-            blogToUpdate.text = blog.text
         }
     }
     if(blog.author !== undefined){
@@ -61,12 +57,9 @@ const putBlogValidate = (blog, blogToUpdate)=>{
                 message: "blog author must be a string and must be less than 40 chars long"
             }
         }
-        else{
-            blogToUpdate.author = blog.author
-        }
     }
-    if(blog.category !== undefined){
-        if (!Array.isArray(blog.category)){
+    if(blog.categories !== undefined){
+        if (!Array.isArray(blog.categories)){
             return {
                 success: false,
                 message: "blog category is required and must be an array"
@@ -78,7 +71,6 @@ const putBlogValidate = (blog, blogToUpdate)=>{
     }
     return {
         success: true,
-        updatedBlog: blogToUpdate
     }
 }
 
