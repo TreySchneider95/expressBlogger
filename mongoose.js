@@ -13,7 +13,9 @@ const mongoDB = process.env.ATLAS_URI
 
 async function mongooseConnect() {
     try {
-        await mongoose.connect(mongoDB);
+        await mongoose.connect(mongoDB, {dbName: process.env.DATABASE}).then(
+            ()=>{console.log("connected to DB")},
+            (err)=>{console.log(err)})
     } catch (error) {
         throw error
     }
