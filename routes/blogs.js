@@ -10,7 +10,7 @@ const blogController = require("./controllers/blogController")
 // /* GET users listing. */
 router.get('/all', blogController.getAllBlogs); 
 
-router.get('/single/:blogTitleToGet', blogController.getSingleBLog)
+router.get('/single/:blogIdToGet', blogController.getSingleBLog)
 
 router.delete('/single/:blogTitleToDelete', blogController.deleteBlog)
 

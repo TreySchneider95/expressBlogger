@@ -14,7 +14,7 @@ async function getAllBlogs(req, res, next) {
 
 
 async function getSingleBLog(req, res, next){
-    const blog = await Blog.find({title: req.params.blogTitleToGet})
+    const blog = await Blog.find({id: req.params.blogIdToGet})
     res.json({
         sucsess: true,
         blog: blog
