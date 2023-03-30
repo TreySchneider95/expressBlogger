@@ -4,12 +4,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
 
 //loads the contents of config.env
 require("dotenv").config({path: './config.env'});
 
-var { mongoConnect } = require('./mongo.js');
-mongoConnect();
+var { mongooseConnect } = require('./mongoose.js');
+mongooseConnect();
 
 //setup router for each set of routes 
 // importing from routes/ folder 
@@ -19,6 +20,9 @@ const blogsRouter = require('./routes/blogs');
 
 //instantiate the actual express app
 const app = express();
+
+app.use(cors());
+app.options("*", cors());
 
 
 // view engine setup
@@ -55,7 +59,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {title: "Error"});
 }); 
 
 
